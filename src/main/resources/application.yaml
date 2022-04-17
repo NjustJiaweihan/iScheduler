@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    name: masterDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.103:3306/libra
+    username: root
+    password: 12345
+  mvc:
+    static-path-pattern: /**
+
+mybatis:
+  mapper-locations: mybatis/**/*.xml
+  configuration:
+    map-underscore-to-camel-case : true
+
+server:
+  port: 8081

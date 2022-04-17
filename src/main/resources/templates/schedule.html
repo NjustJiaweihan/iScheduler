@@ -4,44 +4,118 @@
     <meta charset="UTF-8">
     <title>iScheduler</title>
 </head>
-<script src="../static/js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"></script>
-<script>
-    function sendInfoByAjax(){
-        .ajax({
-
-        })
-    }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <body>
-    <table>
-        <thead>
+<div id="app2">
+    <div>
+        <table border="1px solid #ccc" width="100%">
+            <tr>
+                <th colspan="14" align="center" width="100%">
+                    week{{cycleList[0].weekSeq}} ({{cycleList[0].startDate}}-{{cycleList[0].endDate}})
+                </th>
+            </tr>
+            <tr>
+                <td>1 day</td><td>2 day</td><td>3 day</td><td>4 day</td><td>5 day</td><td>6 day</td><td>7 day</td>
+                <td>8 day</td><td>9 day</td><td>10 day</td><td>11 day</td><td>12 day</td><td>13 day</td><td>14 day</td>
+            </tr>
+            <tr>
+                <td>{{cycleList[0].taskList}}</td>
+            </tr>
+        </table>
+        <button v-on:click="addTask" style="background-color: limegreen">
+            <span style="color: cornsilk">添加任务</span>
+        </button>
+        <table border="1px solid #ccc" width="100%">
+            <tr>
+                <th colspan="14" align="center">
+                    week{{cycleList[1].weekSeq}} ({{cycleList[1].startDate}}-{{cycleList[1].endDate}})
+                </th>
+            </tr>
+            <tr>
+                <td>1 day</td><td>2 day</td><td>3 day</td><td>4 day</td><td>5 day</td><td>6 day</td><td>7 day</td>
+                <td>8 day</td><td>9 day</td><td>10 day</td><td>11 day</td><td>12 day</td><td>13 day</td><td>14 day</td>
+            </tr>
+            <tr>
+                <td>{{cycleList[1].taskList}}</td>
+            </tr>
+        </table>
+        <button v-on:click="addTask" style="background-color: limegreen">
+            <span style="color: cornsilk">添加任务</span>
+        </button>
+        <table border="1px solid #ccc" width="100%">
+            <tr>
+                <th colspan="14" align="center">
+                    week{{cycleList[2].weekSeq}} ({{cycleList[2].startDate}}-{{cycleList[2].endDate}})
+                </th>
+            </tr>
+            <tr>
+                <td>1 day</td><td>2 day</td><td>3 day</td><td>4 day</td><td>5 day</td><td>6 day</td><td>7 day</td>
+                <td>8 day</td><td>9 day</td><td>10 day</td><td>11 day</td><td>12 day</td><td>13 day</td><td>14 day</td>
+            </tr>
+            <tr>
+                <td>{{cycleList[2].taskList}}</td>
+            </tr>
+        </table>
+        <button v-on:click="addTask" style="background-color: limegreen">
+            <span style="color: cornsilk">添加任务</span>
+        </button>
+        <table border="1px solid #ccc" width="100%">
+            <tr>
+                <th colspan="14" align="center">
+                    week{{cycleList[3].weekSeq}} ({{cycleList[3].startDate}}-{{cycleList[3].endDate}})
+                </th>
+            </tr>
+            <tr>
+                <td>1 day</td><td>2 day</td><td>3 day</td><td>4 day</td><td>5 day</td><td>6 day</td><td>7 day</td>
+                <td>8 day</td><td>9 day</td><td>10 day</td><td>11 day</td><td>12 day</td><td>13 day</td><td>14 day</td>
+            </tr>
+            <tr v-for="task in cycleList[3].taskList">
+                <td>{{task.taskName}}</td>
+            </tr>
+        </table>
+        <button v-on:click="addTask" style="background-color: limegreen">
+            <span style="color: cornsilk">添加任务</span>
+        </button>
+        <hr>
+        <button v-on:click="addTask" style="background-color: limegreen">
+            <span style="color: cornsilk">添加周期</span>
+        </button>
+    </div>
+</div>
 
-        </thead>
-        <tr>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>2</td>
-        </tr>
-    </table>
 </body>
 
 <script>
     new Vue({
-        el: '#app',
+        el: '#app2',
         data: {
-            message: '',
-            isUser: false
+            cycleList: ""
+        },
+        created(){
+            this.getOverview();
         },
         methods: {
-            login(){
-                axios.get("http://127.0.0.1:8081/user/check?name="+this.message).then((Response) => {
-                    this.isUser = Response.data;
-                })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+            getOverview(){
+                axios.get("http://127.0.0.1:8081/schedule/overview").then((Response) => {
+                    this.cycleList = Response.data;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            addTask(){
+                axios.post("http://127.0.0.1:8081/schedule/task").then((Response) => {
+                    location.reload()
+                }).catch((error) => {
+                    console.log(error);
+                });
+            },
+            addCycle(){
+                axios.post("http://127.0.0.1:8081/schedule/cycle").then((Response) => {
+                    location.reload()
+                }).catch((error) => {
+                    console.log(error);
+                });
             }
         }
     })

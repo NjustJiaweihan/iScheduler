@@ -13,12 +13,14 @@ import java.util.Objects;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserRepo userRepo;
-
     @GetMapping("/check")
     public boolean isUser(@RequestParam(value = "name") String name){
-        return false;
+        return true;
         //return Objects.isNull(userRepo.get(name));
+    }
+
+    @GetMapping("/register")
+    public void register(@RequestParam(value = "name") String name){
+
     }
 }

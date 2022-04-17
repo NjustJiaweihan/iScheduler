@@ -11,7 +11,7 @@ public class TaskVO {
 
     private Byte color;
 
-    private List<Date> useDayList;
+    private List<String> useDayList;
 
     public Integer getId() {
         return id;
@@ -37,11 +37,11 @@ public class TaskVO {
         this.color = color;
     }
 
-    public List<Date> getUseDayList() {
+    public List<String> getUseDayList() {
         return useDayList;
     }
 
-    public void setUseDayList(List<Date> useDayList) {
+    public void setUseDayList(List<String> useDayList) {
         this.useDayList = useDayList;
     }
 }

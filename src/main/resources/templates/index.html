@@ -28,23 +28,25 @@
     <label>
         <input v-model="message" placeholder="邮箱前缀">
     </label>
-    <p></p>
     <button v-on:click="login" style="background-color: limegreen">
         <span style="color: cornsilk">To Discover!</span>
     </button>
 </div>
 </body>
 <script>
-    var app = new Vue({
+    new Vue({
         el: '#app',
         data: {
-            message: '',
+            message: "xx",
             isUser: false
         },
         methods: {
             login(){
                 axios.get("http://127.0.0.1:8081/user/check?name="+this.message).then((Response) => {
                     this.isUser = Response.data;
+                    if(this.isUser === true){
+                        window.location.href = 'http://localhost:63342/iScheduler/templates/schedule.html?_ijt=akel8tp0av63qg0ejsd28c4m21';
+                    }
                 })
                 .catch((error) => {
                     console.log(error);

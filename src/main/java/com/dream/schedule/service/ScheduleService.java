@@ -48,7 +48,7 @@ public class ScheduleService {
         }
     }
 
-    public ScheduleVO overview(){
+    public List<CycleVO> overview(){
         List<Cycle> cycleList = cycleRepo.getLastFourCycle(userId);
         ScheduleVO scheduleVO = new ScheduleVO();
         List<CycleVO> cycleVOList = new ArrayList<>();
@@ -58,7 +58,7 @@ public class ScheduleService {
         }
         cycleVOList.sort(Comparator.comparing(CycleVO::getWeekSeq));
         scheduleVO.setCycleList(cycleVOList);
-        return scheduleVO;
+        return scheduleVO.getCycleList();
     }
 
     public void addCycle(){

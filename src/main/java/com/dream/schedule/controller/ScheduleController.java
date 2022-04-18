@@ -17,11 +17,6 @@ public class ScheduleController {
     @Autowired
     private ScheduleService scheduleService;
 
-    @PostMapping("/init")
-    public void init(@RequestBody AddCycleCmd cycleCmd){
-        scheduleService.init(cycleCmd);
-    }
-
     @GetMapping("/overview")
     public List<CycleVO> overview(){
         return scheduleService.overview();

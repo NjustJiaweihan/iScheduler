@@ -16,10 +16,11 @@ public class UserRepo {
     @Resource
     private UserDAO userDAO;
 
-    public void insert(String name){
+    public Integer insert(String name){
         User record = new User();
         record.setName(name);
         userDAO.insertSelective(record);
+        return record.getId();
     }
 
     public User get(String name){

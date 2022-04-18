@@ -28,23 +28,21 @@ public class ScheduleService {
     @Autowired
     private TaskRepo taskRepo;
 
-    public void init(AddCycleCmd cycleCmd){
-        Integer weekSeq = cycleCmd.getWeekSeq();
-        Date start = cycleCmd.getStartDate();
+    public void init(Integer userId, Integer weekSeq, Date startDate){
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(start);
+        calendar.setTime(startDate);
         for (int i=0; i<4; i++){
             Cycle cycle = new Cycle();
             cycle.setUserId(userId);
             cycle.setWeekSeq(weekSeq);
-            cycle.setStartDate(start);
+            cycle.setStartDate(startDate);
             calendar.add(Calendar.DATE, 13);
             cycle.setEndDate(calendar.getTime());
             cycle.setDayCount(14);
             cycleRepo.insert(cycle);
             weekSeq += 2;
             calendar.add(Calendar.DATE, 1);
-            start = calendar.getTime();
+            startDate = calendar.getTime();
         }
     }
 

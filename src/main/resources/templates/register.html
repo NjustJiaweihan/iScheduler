@@ -3,15 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>iScheduler</title>
+    <style>
+        .main{
+            text-align: center;
+            background-color: #fff;
+            border-radius: 20px;
+            width: 300px;
+            height: 350px;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
 <body>
-<div id="app">
+<div id="app" class="main">
     <p style="font-size: x-large">注册</p>
     <span style="font-size: small">昵称: </span>
     <label>
-        <input v-model="message" placeholder="邮箱前缀">
+        <input v-model="name" placeholder="邮箱前缀">
+    </label>
+    <label>
+        <input v-model="weekSeq" placeholder="12">
+    </label>
+    <label>
+        <input v-model="startDate" placeholder="2022-03-01">
     </label>
     <button v-on:click="register" style="background-color: limegreen">
         <span style="color: cornsilk">To Discover!</span>
@@ -22,14 +43,15 @@
     new Vue({
         el: '#app',
         data: {
-            message: ""
+            name: "",
+            weekSeq:"",
+            startDate:""
         },
         methods: {
             register(){
-                axios.get("http://127.0.0.1:8081/user/register?name="+this.message).then((Response) => {
-                    //if(Response.code === 200){
-                        window.location.href = 'http://localhost:63342/iScheduler/templates/index.html?_ijt=1kabdnshdnqjb5k5661f9affda';
-                    //}
+                axios.post("http://127.0.0.1:8081/user/register?name="+this.name+"&weekSeq="+this.weekSeq+"&startDate="+this.startDate).then((Response) => {
+                    alert("注册成功！")
+                    window.location.href = 'http://localhost:63342/iScheduler/templates/index.html?_ijt=1kabdnshdnqjb5k5661f9affda';
                 })
                     .catch((error) => {
                         console.log(error);

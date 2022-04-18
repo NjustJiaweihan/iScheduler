@@ -37,7 +37,7 @@
     new Vue({
         el: '#app',
         data: {
-            message: "xx",
+            message: "",
             isUser: false
         },
         methods: {
@@ -46,6 +46,8 @@
                     this.isUser = Response.data;
                     if(this.isUser === true){
                         window.location.href = 'http://localhost:63342/iScheduler/templates/schedule.html?_ijt=akel8tp0av63qg0ejsd28c4m21';
+                    } else {
+                        window.location.href = 'http://localhost:63342/iScheduler/templates/register.html?_ijt=remrvv9014ckq5doemj9tmac8v';
                     }
                 })
                 .catch((error) => {
